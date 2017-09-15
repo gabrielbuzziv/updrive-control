@@ -12,29 +12,18 @@ class AccountCreated extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /**
-     * Account instance.
-     *
-     * @var
-     */
-    protected $account;
-
-    /**
-     * Password.
-     *
-     * @var
-     */
-    protected $password;
+    public $account;
+    public $url;
 
     /**
      * AccountCreated constructor.
      *
      * @param Account $account
      */
-    public function __construct(Account $account, $password)
+    public function __construct(Account $account)
     {
         $this->account = $account;
-        $this->password = $password;
+        $this->url = "http://{$this->account->slug}.updrive.app?email={$this->account->email}";
     }
 
     /**
@@ -44,10 +33,6 @@ class AccountCreated extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.account.created')
-                    ->with([
-                        'account' => $this->account,
-                        'password' => $this->password
-                    ]);
+        return $this->view('emails.account_created');
     }
 }

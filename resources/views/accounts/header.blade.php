@@ -8,8 +8,6 @@
         </button>
         <ul class="dropdown-menu dropdown-menu-right">
             <li><a href="/accounts/{{ $account->id }}/edit">Edit</a></li>
-            <li><a href="/accounts/{{ $account->id }}/modules">Modules</a></li>
-            <li><a href="/accounts/{{ $account->id }}/billing">Billling</a></li>
             <li><a href="/accounts/{{ $account->id }}/backup">Backup</a></li>
             <li><a href="/accounts/{{ $account->id }}/settings">Settings</a></li>
         </ul>

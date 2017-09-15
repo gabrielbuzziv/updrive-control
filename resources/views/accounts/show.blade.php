@@ -24,24 +24,8 @@
                             </li>
 
                             <li>
-                                <a href="/accounts/{{ $account->id }}/modules">
-                                    <i class="mdi mdi-view-module"></i>
-                                    <span>Modules</span>
-                                    <small>Enable/Disable</small>
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="/accounts/{{ $account->id }}/billings">
-                                    <i class="mdi mdi-cash-usd"></i>
-                                    <span>Billing</span>
-                                    <small>Invoices and payments</small>
-                                </a>
-                            </li>
-
-                            <li>
                                 <a href="/accounts/{{ $account->id }}/backup">
-                                    <i class="mdi mdi-backup-restore"></i>
+                                    <i class="mdi mdi-database"></i>
                                     <span>Backup</span>
                                     <small>Database and Storage</small>
                                 </a>
@@ -72,20 +56,6 @@
                                     </a>
                                 </li>
                             @endif
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Resources
-                    </div>
-
-                    <div class="panel-body">
-                        <p>Some charts about usage resources.</p>
-                        <ul>
-                            <li>Database Size</li>
-                            <li>Storage Size</li>
                         </ul>
                     </div>
                 </div>

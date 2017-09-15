@@ -1,6 +1,6 @@
 @if (! $account)
     <input type="hidden" name="slug" value="" v-model="slug">
-    <blockquote>Domain: @{{ slug }}.saas.app</blockquote>
+    <blockquote>Domain: @{{ slug }}.updrive.app</blockquote>
 @endif
 
 <div class="form-group">
@@ -11,11 +11,6 @@
 <div class="form-group">
     <label>E-mail</label>
     <input type="email" name="email" class="form-control" value="{{ $account ? $account->email : '' }}">
-</div>
-
-<div class="form-group">
-    <label>Logo</label>
-    <input type="file" name="logo" class="form-control">
 </div>
 
 <button type="submit" class="btn btn-success margin-top-20">Save</button>

@@ -4,10 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Module;
 use App\Account;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Events\AccountCreated;
-use App\Events\AccountBackupRequested;
 use App\Events\BackupAccountDatabaseEvent;
 use App\Events\BackupAccountDatabaseRequested;
 use Illuminate\Support\Facades\DB;

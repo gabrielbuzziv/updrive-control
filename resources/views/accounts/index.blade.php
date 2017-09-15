@@ -33,8 +33,8 @@
                                             <small>{{ $account->email }}</small>
                                         </td>
                                         <td>
-                                            <a href="http://{{ $account->slug }}.saas.app" target="_blank">
-                                                {{ $account->slug }}.saas.app
+                                            <a href="http://{{ $account->slug }}.updrive.app" target="_blank">
+                                                {{ $account->slug }}.updrive.app
                                             </a>
                                         </td>
                                         <td align="right">

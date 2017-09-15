@@ -31,11 +31,10 @@ class AccountSettingController extends Controller
      * @param Account $account
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function restoreStorage(Account $account)
+    public function restoreDefault(Account $account)
     {
         $settings = [
-            ['label' => 'storage_limit', 'value' => 1024],
-            ['label' => 'storage_listable', 'value' => 0],
+            ['label' => 'companies_limit', 'value' => 20],
         ];
         $this->updateOrCreateSettings($account, $settings);
 

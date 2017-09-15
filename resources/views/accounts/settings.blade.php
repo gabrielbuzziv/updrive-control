@@ -11,8 +11,8 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">
-                            <i class="mdi mdi-archive margin-right-10"></i>
-                            Storage
+                            <i class="mdi mdi-settings margin-right-10"></i>
+                            Settings
                         </h3>
                     </div>
 
@@ -22,32 +22,13 @@
                             <input type="hidden" name="_method" value="patch">
 
                             <div class="form-group">
-                                <label class="control-label col-md-3">Storage Limit</label>
+                                <label class="control-label col-md-3">Companies Limit</label>
                                 <div class="col-md-4">
-                                    <div class="input-group">
-                                        <input type="text" name="settings[storage_limit]" class="form-control" value="{{ isset($account->setting->storage_limit) ? $account->setting->storage_limit : '' }}">
-                                        <span class="input-group-addon">MB</span>
-                                    </div>
-
-                                    <small class="helper-block">This is the total of MB is possible to store.</small>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="control-label col-md-3">Listable Storage</label>
-                                <div class="col-md-4">
-                                    <label class="radio radio-inline">
-                                        <input type="radio" name="settings[storage_listable]" value="1" {{ isset($account->setting->storage_listable) && $account->setting->storage_listable == '1' ? 'checked' : '' }}>
-                                        <span>Yes</span>
-                                    </label>
-
-                                    <label class="radio radio-inline">
-                                        <input type="radio" name="settings[storage_listable]" value="0" {{ isset($account->setting->storage_listable) && $account->setting->storage_listable == '0' ? 'checked' : '' }}>
-                                        <span>No</span>
-                                    </label>
-
-                                    <div class="clearfix"></div>
-                                    <small class="helper-block">The account manager can see the storage.</small>
+                                    <select name="settings[companies_limit]" class="form-control">
+                                        <option value="20" {{ isset($account->setting->companies_limit) && $account->setting->companies_limit == '20' ? 'selected' : '' }}>20 companies</option>
+                                        <option value="150" {{ isset($account->setting->companies_limit) && $account->setting->companies_limit == '150' ? 'selected' : '' }}>150 companies</option>
+                                        <option value="300" {{ isset($account->setting->companies_limit) && $account->setting->companies_limit == '300' ? 'selected' : '' }}>300 companies</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -55,7 +36,7 @@
                         <div class="panel-footer">
                             <div class="col-md-6 text-center col-md-offset-3">
                                 <button class="btn btn-success" type="submit">Save</button>
-                                <a href="/accounts/{{ $account->id }}/settings/storage" class="btn btn-default">Restore Default</a>
+                                <a href="/accounts/{{ $account->id }}/settings/default" class="btn btn-default">Restore Default</a>
                             </div>
 
                             <div class="clearfix"></div>

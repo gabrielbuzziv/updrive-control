@@ -11,14 +11,14 @@ use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class AccountCreated
+class MigrationInstalled
 {
     use InteractsWithSockets, SerializesModels;
 
     public $account;
 
     /**
-     * AccountCreated constructor.
+     * Create a new event instance.
      *
      * @param Account $account
      */

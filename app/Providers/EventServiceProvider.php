@@ -17,7 +17,23 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $listen = [
         'App\Events\AccountCreated' => [
-            'App\Listeners\InstallAccount',
+            'App\Listeners\CreateDatabase',
+        ],
+        
+        'App\Events\DatabaseCreated' => [
+            'App\Listeners\InstallMigration'
+        ],
+
+        'App\Events\MigrationInstalled' => [
+            'App\Listeners\MigrateMigration'
+        ],
+
+        'App\Events\MigrationMigrated' => [
+            'App\Listeners\InstallStorage'
+        ],
+
+        'App\Events\StorageInstalled' => [
+            'App\Listeners\InstallAccount'
         ],
 
         'App\Events\AccountBackupRequested' => [

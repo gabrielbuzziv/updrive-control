@@ -2,33 +2,21 @@
 
 namespace App\Listeners;
 
-use App\Events\AccountCreated;
+use App\Events\StorageInstalled;
+use App\Mail\AccountCreated;
+use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Storage;
 
-class InstallAccount implements ShouldQueue
+class InstallAccount
 {
 
-    /**
-     * The account that is being installed.
-     *
-     * @var
-     */
     protected $account;
-
-    /**
-     * The connection that will be used to communicate with account database.
-     *
-     * @var
-     */
     protected $connection;
 
     /**
-     * InstallAccount constructor.
+     * Create the event listener.
      */
     public function __construct()
     {
@@ -38,20 +26,17 @@ class InstallAccount implements ShouldQueue
     /**
      * Handle the event.
      *
-     * @param  AccountCreated $event
+     * @param  StorageInstalled  $event
      * @return void
      */
-    public function handle(AccountCreated $event)
+    public function handle(StorageInstalled $event)
     {
         $this->account = $event->account;
 
         try {
             $this->installSettings();
-            $this->createDatabase();
-            $this->createStorage();
             $this->connect();
             $this->installPermissions();
-            $this->installRoles();
             $this->createAdmin();
         } catch (Exception $e) {
             Log::error($e->getMessage());
@@ -63,8 +48,7 @@ class InstallAccount implements ShouldQueue
      */
     private function installSettings()
     {
-        $this->addSetting('storage_limit', 1024);
-        $this->addSetting('storage_listable', 0);
+        $this->addSetting('companies_limit', 20);
         $this->addSetting('backup_database_limit', 7);
     }
 
@@ -77,27 +61,6 @@ class InstallAccount implements ShouldQueue
     private function addSetting($label, $value)
     {
         $this->account->settings()->create(['label' => $label, 'value' => $value]);
-    }
-
-    /**
-     * Create account database.
-     */
-    private function createDatabase()
-    {
-        DB::statement("CREATE DATABASE {$this->account->slug}");
-        Artisan::call('tenanti:install', ['driver' => 'account']);
-        Artisan::call('tenanti:migrate', ['driver' => 'account']);
-    }
-
-    /**
-     * Create account storage.
-     */
-    private function createStorage()
-    {
-        Storage::disk('s3')->makeDirectory($this->account->slug);
-        Storage::disk('s3')->makeDirectory("{$this->account->slug}/database");
-        Storage::disk('s3')->makeDirectory("{$this->account->slug}/documents");
-        Storage::disk('s3')->makeDirectory("{$this->account->slug}/images");
     }
 
     /**
@@ -128,40 +91,14 @@ class InstallAccount implements ShouldQueue
     private function installPermissions()
     {
         $permissions = [
-            ['name' => 'manage-account', 'display_name' => 'Manage Account'],
-            ['name' => 'manage-roles', 'display_name' => 'Manage Roles'],
-            ['name' => 'manage-users', 'display_name' => 'Manage Users'],
-            ['name' => 'manage-products', 'display_name' => 'Manage Products'],
-            ['name' => 'manage-billings', 'display_name' => 'Manage Billings'],
+            ['name' => 'manage-users', 'display_name' => 'Gerenciar Usuários'],
+            ['name' => 'manage-companies', 'display_name' => 'Gerenciar Empresas'],
+            ['name' => 'manage-contacts', 'display_name' => 'Gerenciar Contatos'],
+            ['name' => 'manage-updrive', 'display_name' => 'Gerenciar Documentos'],
         ];
 
         array_walk($permissions, function ($permission) {
             $this->connection->table('permissions')->insert($permission);
-        });
-    }
-
-    /**
-     * Install roles in account database.
-     */
-    private function installRoles()
-    {
-        $roles = [
-            ['name' => 'owner', 'display_name' => 'Owner', 'default' => true, 'permissions' => ['manage-account']],
-            ['name' => 'administration', 'display_name' => 'Administration', 'default' => true, 'permissions' => ['manage-roles', 'manage-users']],
-            ['name' => 'manager', 'display_name' => 'Manager', 'default' => true, 'permissions' => ['manage-products']],
-        ];
-
-        array_walk($roles, function ($role) {
-            $permissions = $role['permissions'];
-            $role = array_filter($role, function ($key) {
-                return $key != 'permissions';
-            }, ARRAY_FILTER_USE_KEY);
-            $roleId = $this->connection->table('roles')->insertGetId($role);
-
-            array_walk($permissions, function ($permission) use ($roleId) {
-                $permissionId = $this->connection->table('permissions')->select('id')->where('name', $permission)->first()->id;
-                $this->connection->table('permission_role')->insert(['role_id' => $roleId, 'permission_id' => $permissionId]);
-            });
         });
     }
 
@@ -177,12 +114,12 @@ class InstallAccount implements ShouldQueue
             'password' => bcrypt($password),
         ]);
 
-        $roles = $this->connection->table('roles')->get()->toArray();
-        array_walk($roles, function ($role) use ($userId) {
-            $query = $this->connection->table('role_user');
-            $query->insert(['user_id' => $userId, 'role_id' => $role->id]);
+        $permissions = $this->connection->table('permissions')->get()->toArray();
+        array_walk($permissions, function ($permission) use ($userId) {
+            $query = $this->connection->table('permission_user');
+            $query->insert(['user_id' => $userId, 'permission_id' => $permission->id]);
         });
 
-        Mail::to($this->account->email)->send(new \App\Mail\AccountCreated($this->account, $password));
+        Mail::to($this->account->email)->send(new AccountCreated($this->account));
     }
 }
