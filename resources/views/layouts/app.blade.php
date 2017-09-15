@@ -55,6 +55,10 @@
                             @permission('manage-billings')
                             <li><a href="/billing">Billing</a></li>
                             @endpermission
+
+                            @permission('manage-modules')
+                            <li><a href="/modules">Modules</a></li>
+                            @endpermission
                         </ul>
 
                         <!-- Right Side Of Navbar -->
@@ -93,8 +97,10 @@
         @yield('content')
     </div>
 
+    @stack('modals')
+
     <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.2.4/vue.min.js"></script>
+    {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.2.4/vue.min.js"></script>--}}
     <script src="/js/app.js"></script>
     @stack('scripts')
 </body>

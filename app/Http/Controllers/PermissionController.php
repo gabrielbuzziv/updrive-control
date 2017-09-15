@@ -48,6 +48,8 @@ class PermissionController extends Controller
     {
         Permission::create($request->all());
 
+        flash('The permission has been created.', 'success');
+
         return redirect('/permissions');
     }
 
@@ -73,6 +75,8 @@ class PermissionController extends Controller
     {
         $permission->update($request->all());
 
+        flash('The permission has been updated.', 'success');
+
         return redirect('/permissions');
     }
 
@@ -85,6 +89,8 @@ class PermissionController extends Controller
     public function destroy(Permission $permission)
     {
         $permission->delete();
+
+        flash('The permission has been deleted.', 'success');
 
         return redirect('/permissions');
     }

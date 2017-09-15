@@ -1,15 +1,16 @@
-<input type="hidden" name="slug" value="" v-model="slug">
-
-<blockquote>Domain: @{{ slug }}.saas.app</blockquote>
+@if (! $account)
+    <input type="hidden" name="slug" value="" v-model="slug">
+    <blockquote>Domain: @{{ slug }}.saas.app</blockquote>
+@endif
 
 <div class="form-group">
     <label>Nome</label>
-    <input type="text" name="name" class="form-control" v-model="name">
+    <input type="text" name="name" class="form-control" v-model="name" value="{{ $account ? $account->name : '' }}">
 </div>
 
 <div class="form-group">
     <label>E-mail</label>
-    <input type="email" name="email" class="form-control">
+    <input type="email" name="email" class="form-control" value="{{ $account ? $account->email : '' }}">
 </div>
 
 <div class="form-group">
@@ -17,17 +18,7 @@
     <input type="file" name="logo" class="form-control">
 </div>
 
-@if ($account)
-    <div class="form-group">
-        <label>Active</label>
-        <select name="active">
-            <option value="0">No</option>
-            <option value="1">Yes</option>
-        </select>
-    </div>
-@endif
-
-<button type="submit" class="btn btn-success">Save</button>
+<button type="submit" class="btn btn-success margin-top-20">Save</button>
 
 @push('scripts')
 <script>
@@ -35,7 +26,7 @@
         el: '#app',
 
         data: {
-            name: ''
+            name: '{{ $account ? $account->name : '' }}'
         },
 
         computed: {

@@ -57,7 +57,9 @@ class UserController extends Controller
         } else {
             $user->roles()->sync([]);
         }
-        
+
+        flash('The user has been created.', 'success');
+
         return redirect('/users');
     }
 
@@ -91,6 +93,8 @@ class UserController extends Controller
             $user->roles()->sync([]);
         }
 
+        flash('The user has been updated.', 'success');
+
         return redirect('/users');
     }
 
@@ -103,6 +107,8 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
+
+        flash('The user has been deleted.', 'success');
 
         return redirect('/users');
     }

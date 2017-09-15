@@ -6,7 +6,13 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
-        "laravel/framework": "5.3.*"
+        "barryvdh/laravel-debugbar": "^2.3",
+        "jenssegers/rollbar": "^1.5",
+        "laracasts/flash": "^2.0",
+        "laravel/framework": "5.3.*",
+        "laravelcollective/remote": "^5.3.0",
+        "predis/predis": "^1.1",
+        "pusher/pusher-php-server": "^2.6"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -15,7 +21,8 @@
         "symfony/css-selector": "3.1.*",
         "symfony/dom-crawler": "3.1.*",
 	    "zizaco/entrust": "5.2.x-dev",
-        "orchestra/tenanti": "~3.0"
+        "orchestra/tenanti": "~3.0",
+        "league/flysystem-aws-s3-v3": "~1.0"
     },
     "autoload": {
         "classmap": [

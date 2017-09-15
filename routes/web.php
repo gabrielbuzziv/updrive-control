@@ -15,12 +15,28 @@ Route::get('/', function () {
     return redirect('accounts');
 });
 
+Route::get('accounts/{account}/details', 'AccountController@details');
 Route::get('accounts/{account}/backup', 'AccountController@backup');
+Route::get('accounts/{account}/settings', 'AccountController@settings');
+Route::get('accounts/{account}/modules', 'AccountController@modules');
+Route::post('accounts/{account}/modules', 'AccountController@selectedModules');
+Route::patch('accounts/{account}/modules', 'AccountController@updateModules');
+Route::get('accounts/{account}/toggle', 'AccountController@toggleActive');
 Route::get('accounts', 'AccountController@index');
 Route::get('accounts/create', 'AccountController@create');
+Route::get('accounts/{account}', 'AccountController@show');
+Route::get('accounts/{account}/edit', 'AccountController@edit');
 Route::post('accounts', 'AccountController@store');
 Route::patch('accounts/{account}', 'AccountController@update');
-Route::delete('accounts/{account}', 'AccountController@destroy');
+Route::get('accounts/{account}/destroy', 'AccountController@destroy');
+
+Route::get('accounts/{account}/backup/{backup}/download', 'AccountBackupController@download');
+Route::get('accounts/{account}/backup/create', 'AccountBackupController@backupDatabase');
+Route::get('accounts/{account}/backup/databases', 'AccountBackupController@databases');
+
+Route::patch('accounts/{account}/settings', 'AccountSettingController@update');
+Route::get('accounts/{account}/settings/backup', 'AccountSettingController@restoreBackup');
+Route::get('accounts/{account}/settings/storage', 'AccountSettingController@restoreStorage');
 
 Route::get('users', 'UserController@index');
 Route::get('users/create', 'UserController@create');
@@ -42,5 +58,13 @@ Route::get('permissions/{permission}/edit', 'PermissionController@edit');
 Route::post('permissions', 'PermissionController@store');
 Route::patch('permissions/{permission}', 'PermissionController@update');
 Route::delete('permissions/{permission}', 'PermissionController@destroy');
+
+Route::get('modules/list', 'ModuleController@listOfModules');
+Route::get('modules', 'ModuleController@index');
+Route::get('modules/create', 'ModuleController@create');
+Route::get('modules/{module}/edit', 'ModuleController@edit');
+Route::post('modules', 'ModuleController@store');
+Route::patch('modules/{module}', 'ModuleController@update');
+Route::delete('modules/{module}', 'ModuleController@destroy');
 
 Auth::routes();

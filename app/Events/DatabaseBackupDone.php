@@ -7,27 +7,37 @@ use Illuminate\Broadcasting\Channel;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
+use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class BackupAccountDatabaseRequested
+class DatabaseBackupDone implements ShouldQueue, ShouldBroadcast
 {
     use InteractsWithSockets, SerializesModels;
 
     /**
-     * Account instance.
+     * Account.
      *
      * @var
      */
     public $account;
 
     /**
-     * BackupAccountDatabaseRequested constructor.
+     * Database backup.
      *
-     * @param Account $account
+     * @var
      */
-    public function __construct(Account $account)
+    public $backup;
+
+    /**
+     * DatabaseBackupDone constructor.
+     * @param Account $account
+     * @param $backup
+     */
+    public function __construct(Account $account, $backup)
     {
         $this->account = $account;
+        $this->backup = $backup;
     }
 
     /**
@@ -37,6 +47,6 @@ class BackupAccountDatabaseRequested
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('channel-name');
+        return new PrivateChannel('account');
     }
 }

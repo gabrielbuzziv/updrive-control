@@ -4,6 +4,8 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
+                @include('partials.alert')
+
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <a href="/accounts/create" class="btn btn-primary btn-xs pull-right">Create</a>
@@ -36,18 +38,9 @@
                                             </a>
                                         </td>
                                         <td align="right">
-                                            <a href="/accounts/{{ $account->id }}/backup" class="btn btn-default btn-xs">
-                                                <i class="mdi mdi-database"></i>
+                                            <a href="/accounts/{{ $account->id }}" class="btn btn-default">
+                                                <i class="mdi mdi-arrow-right"></i>
                                             </a>
-
-                                            <form action="/accounts/{{ $account->id }}" method="POST" style="display: inline-block;">
-                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                <input type="hidden" name="_method" value="delete">
-
-                                                <button type="submit" class="btn btn-default btn-xs" onClick="return confirm('Tem certeza?')">
-                                                    <i class="mdi mdi-delete"></i>
-                                                </button>
-                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -58,4 +51,21 @@
             </div>
         </div>
     </div>
+
+    <backup />
 @endsection
+
+@push('scripts')
+<script>
+    new Vue({
+        el: '#app',
+
+        methods: {
+            showModal (accountId, modalId) {
+                this.$root.$emit('load::backup', accountId)
+                this.$root.$emit('show::modal', modalId)
+            }
+        }
+    })
+</script>
+@endpush

@@ -169,14 +169,17 @@ return [
         Zizaco\Entrust\EntrustServiceProvider::class,
         Orchestra\Tenanti\TenantiServiceProvider::class,
         Orchestra\Tenanti\CommandServiceProvider::class,
-        //
+        Laracasts\Flash\FlashServiceProvider::class,
+        Jenssegers\Rollbar\RollbarServiceProvider::class,
+        Collective\Remote\RemoteServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
 
         /*
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
+        App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\SetupServiceProvider::class,
@@ -230,6 +233,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
         'Tenanti' => Orchestra\Support\Facades\Tenanti::class,
+        'SSH' => Collective\Remote\RemoteFacade::class,
 
     ],
 

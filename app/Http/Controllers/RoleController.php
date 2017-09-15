@@ -38,6 +38,7 @@ class RoleController extends Controller
     {
         $permissions = Permission::all();
 
+
         return view('roles.create', compact('permissions'));
     }
 
@@ -56,6 +57,8 @@ class RoleController extends Controller
         } else {
             $role->perms()->sync([]);
         }
+
+        flash('The role has been created.', 'success');
 
         return redirect('/roles');
     }
@@ -90,6 +93,8 @@ class RoleController extends Controller
             $role->perms()->sync([]);
         }
 
+        flash('The role has been updated.', 'success');
+
         return redirect('/roles');
     }
 
@@ -102,6 +107,8 @@ class RoleController extends Controller
     public function destroy(Role $role)
     {
         $role->delete();
+
+        flash('The role has been deleted.', 'success');
 
         return redirect('/roles');
     }

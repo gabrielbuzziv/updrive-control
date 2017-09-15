@@ -17,3 +17,23 @@ elixir((mix) => {
     mix.sass('app.scss')
        .webpack('app.js');
 });
+
+elixir.webpack.mergeConfig({
+    babel: {
+        presets: ['es2015'],
+    },
+
+    module: {
+        loaders: [
+            {
+                test: /\.jsx$/,
+                loader: 'babel'
+            },
+        ]
+    },
+
+    resolve: {
+        modulesDirectories: ['node_modules'],
+        extensions: ['', '.js', '.vue']
+    }
+});

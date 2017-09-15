@@ -1,0 +1,137 @@
+$honeycomb-max: 3;
+$honeycomb-space: 5px;
+$honeycomb-width: 170px;
+$honeycomb-height: ($honeycomb-width * 1.3);
+$selected-color: rgba(153, 0, 0, .8);
+$hover-color: #898989;
+$color: #ccc;
+$hive-width: ($honeycomb-width * ($honeycomb-max) + ($honeycomb-space * $honeycomb-max));
+
+.hive {
+    width: $hive-width;
+    margin: 0 auto;
+    //text-align: centesr;
+
+    .honeycomb {
+        width: $honeycomb-width;
+        height: $honeycomb-height;
+        position: relative;
+        display: inline-block;
+        margin-right: $honeycomb-space;
+
+        &:nth-child(5n-1) {
+            margin-left: ($honeycomb-width * 0.52);
+        }
+
+        /* Todas as linhas depois da 1 terão uma margin negativa. */
+        &:nth-child(n+3) {
+            margin-top: -($honeycomb-width * 0.45);
+        }
+
+        .cavity {
+            overflow: hidden;
+            visibility: hidden;
+            -webkit-transform: rotate(120deg);
+            -moz-transform: rotate(120deg);
+            -o-transform: rotate(120deg);
+            -ms-transform: rotate(120deg);
+            transform: rotate(120deg);
+            cursor: pointer;
+            position: absolute;
+            width: $honeycomb-width;
+            height: $honeycomb-width * 2;
+            top: -45px;
+
+            &.disabled {
+                cursor: default;
+
+                .out {
+                    .in {
+                        background: #eee;
+                        color: #c2c2c2;
+                    }
+                }
+            }
+
+            &:not(.disabled) {
+                .out {
+                    .in {
+                        &.selected {
+                            background: $selected-color;
+
+                            &:hover,
+                            &:focus {
+                                background: $selected-color;
+                            }
+                        }
+
+                        &:hover,
+                        &:focus {
+                            background: $hover-color;
+                        }
+                    }
+                }
+            }
+
+            .out {
+                overflow: hidden;
+                width: 100%;
+                height: 100%;
+                -webkit-transform: rotate(-60deg);
+                -moz-transform: rotate(-60deg);
+                -o-transform: rotate(-60deg);
+                -ms-transform: rotate(-60deg);
+                transform: rotate(-60deg);
+
+                .in {
+                    background: $color;
+                    overflow: hidden;
+                    color: #fff;
+                    line-height: 50%;
+                    width: 100%;
+                    height: 100%;
+                    visibility: visible;
+                    -webkit-transform: rotate(-60deg);
+                    -moz-transform: rotate(-60deg);
+                    -o-transform: rotate(-60deg);
+                    -ms-transform: rotate(-60deg);
+                    transform: rotate(-60deg);
+                    transition: all .2s;
+
+                    .content {
+                        position: relative;
+                        display: block;
+                        top: 50%;
+                        left: 50%;
+                        z-index: 9999;
+                        transform: translate(-50%, -50%);
+                        line-height: 20px;
+                        text-align: center;
+
+                        strong {
+                            font-size: 1.3vw;
+                            font-weight: 300;
+                            display: block;
+                        }
+
+                        > span {
+                            margin-bottom: 10px;
+                            margin-top: 15px;
+                            display: block;
+
+                            b {
+                                font-size: 0.7vw;
+                                margin-bottom: 5px;
+                            }
+
+                            p {
+                                font-size: 0.6vw;
+                                margin: 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
