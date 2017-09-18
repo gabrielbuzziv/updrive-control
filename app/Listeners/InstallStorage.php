@@ -4,6 +4,7 @@ namespace App\Listeners;
 
 use App\Events\MigrationMigrated;
 use App\Events\StorageInstalled;
+use App\Mail\AccountCreationFailed;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
