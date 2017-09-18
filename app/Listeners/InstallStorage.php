@@ -5,10 +5,11 @@ namespace App\Listeners;
 use App\Events\MigrationMigrated;
 use App\Events\StorageInstalled;
 use App\Mail\AccountCreationFailed;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
-class InstallStorage
+class InstallStorage implements ShouldQueue
 {
     /**
      * Create the event listener.

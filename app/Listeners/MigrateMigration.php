@@ -5,10 +5,11 @@ namespace App\Listeners;
 use App\Events\MigrationInstalled;
 use App\Events\MigrationMigrated;
 use App\Mail\AccountCreationFailed;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Mail;
 
-class MigrateMigration
+class MigrateMigration implements ShouldQueue
 {
     /**
      * Create the event listener.
@@ -28,7 +29,6 @@ class MigrateMigration
     {
         try {
             Artisan::call('tenanti:migrate', ['driver' => 'account']);
-            Mail::to('updrive@updrive.me')->send(new AccountCreationFailed('Migrou?'));
             event(new MigrationMigrated($event->account));
         } catch (Exception $e) {
             Mail::to('updrive@updrive.me')->send(new AccountCreationFailed('Falhou ao migrar a migração'));

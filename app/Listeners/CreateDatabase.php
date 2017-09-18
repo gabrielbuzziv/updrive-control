@@ -6,10 +6,11 @@ namespace App\Listeners;
 use App\Events\AccountCreated;
 use App\Events\DatabaseCreated;
 use App\Mail\AccountCreationFailed;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
-class CreateDatabase
+class CreateDatabase implements ShouldQueue
 {
     /**
      * Create the event listener.

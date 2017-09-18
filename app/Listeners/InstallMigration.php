@@ -5,10 +5,11 @@ namespace App\Listeners;
 use App\Events\DatabaseCreated;
 use App\Events\MigrationInstalled;
 use App\Mail\AccountCreationFailed;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Mail;
 
-class InstallMigration
+class InstallMigration implements ShouldQueue
 {
     /**
      * Create the event listener.

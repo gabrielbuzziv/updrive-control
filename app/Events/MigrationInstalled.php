@@ -11,7 +11,7 @@ use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class MigrationInstalled
+class MigrationInstalled implements ShouldQueue
 {
     use InteractsWithSockets, SerializesModels;
 
