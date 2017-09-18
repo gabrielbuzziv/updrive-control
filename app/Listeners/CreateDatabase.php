@@ -10,7 +10,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
-class CreateDatabase implements ShouldQueue
+class CreateDatabase
 {
     /**
      * Create the event listener.

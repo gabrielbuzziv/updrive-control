@@ -9,7 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Mail;
 
-class InstallMigration implements ShouldQueue
+class InstallMigration
 {
     /**
      * Create the event listener.

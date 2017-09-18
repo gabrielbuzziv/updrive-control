@@ -9,7 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
-class InstallStorage implements ShouldQueue
+class InstallStorage
 {
     /**
      * Create the event listener.

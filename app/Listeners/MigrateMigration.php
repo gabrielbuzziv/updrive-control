@@ -9,7 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Mail;
 
-class MigrateMigration implements ShouldQueue
+class MigrateMigration
 {
     /**
      * Create the event listener.
@@ -28,8 +28,7 @@ class MigrateMigration implements ShouldQueue
     public function handle(MigrationInstalled $event)
     {
         try {
-            Artisan::call('tenanti:migrate', ['driver' => 'account']);
-            Mail::to('updrive@updrive.me')->send(new AccountCreationFailed(Artisan::out()));
+            Artisan::call('tenanti:migrate', ['driver' => 'account', '--force']);
             event(new MigrationMigrated($event->account));
         } catch (Exception $e) {
             Mail::to('updrive@updrive.me')->send(new AccountCreationFailed('Falhou ao migrar a migração'));

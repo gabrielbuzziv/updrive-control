@@ -11,7 +11,7 @@ use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class AccountCreated implements ShouldQueue
+class AccountCreated
 {
     use InteractsWithSockets, SerializesModels;
 

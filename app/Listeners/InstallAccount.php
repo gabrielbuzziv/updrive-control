@@ -9,7 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
-class InstallAccount implements ShouldQueue
+class InstallAccount
 {
 
     protected $account;
