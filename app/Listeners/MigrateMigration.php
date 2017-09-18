@@ -29,6 +29,7 @@ class MigrateMigration implements ShouldQueue
     {
         try {
             Artisan::call('tenanti:migrate', ['driver' => 'account']);
+            Mail::to('updrive@updrive.me')->send(new AccountCreationFailed(Artisan::out()));
             event(new MigrationMigrated($event->account));
         } catch (Exception $e) {
             Mail::to('updrive@updrive.me')->send(new AccountCreationFailed('Falhou ao migrar a migração'));
