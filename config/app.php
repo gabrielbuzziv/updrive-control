@@ -170,7 +170,6 @@ return [
         Orchestra\Tenanti\TenantiServiceProvider::class,
         Orchestra\Tenanti\CommandServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
-        Jenssegers\Rollbar\RollbarServiceProvider::class,
         Collective\Remote\RemoteServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
 
