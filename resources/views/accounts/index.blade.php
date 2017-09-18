@@ -33,8 +33,8 @@
                                             <small>{{ $account->email }}</small>
                                         </td>
                                         <td>
-                                            <a href="http://{{ $account->slug }}.updrive.app" target="_blank">
-                                                {{ $account->slug }}.updrive.app
+                                            <a href="http://{{ $account->slug }}.{{ env('FRONTEND') }}" target="_blank">
+                                                {{ $account->slug }}.{{ env('FRONTEND') }}
                                             </a>
                                         </td>
                                         <td align="right">

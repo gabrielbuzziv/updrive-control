@@ -1,6 +1,6 @@
 @if (! $account)
     <input type="hidden" name="slug" value="" v-model="slug">
-    <blockquote>Domain: @{{ slug }}.updrive.app</blockquote>
+    <blockquote>Domain: @{{ slug }}.{{ env('FRONTEND') }}</blockquote>
 @endif
 
 <div class="form-group">
