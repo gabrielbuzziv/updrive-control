@@ -7,7 +7,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class AccountCreationFailed extends Mailable implements ShouldQueue
+class AccountCreationFailed extends Mailable
 {
     use Queueable, SerializesModels;
 

@@ -28,7 +28,7 @@ class MigrateMigration
     public function handle(MigrationInstalled $event)
     {
         try {
-            Artisan::call('tenanti:migrate', ['driver' => 'account', '--force']);
+            Artisan::call('tenanti:migrate', ['driver' => 'account', '--force' => true]);
             event(new MigrationMigrated($event->account));
         } catch (Exception $e) {
             Mail::to('updrive@updrive.me')->send(new AccountCreationFailed('Falhou ao migrar a migração'));
