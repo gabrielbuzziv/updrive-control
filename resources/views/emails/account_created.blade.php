@@ -59,8 +59,7 @@ $style = [
         'email-footer_anchor'    => 'color: #ACACAC; font-size: 11px;',
 
     /* Body ------------------------------ */
-
-        'body_action' => 'width: 100%; margin: 30px auto; padding: 0; text-align: center;',
+        'body_action' => 'width: 100%; margin: 0 auto; padding: 25px 0 0; text-align: center;',
         'body_sub'    => 'margin-top: 25px; padding-top: 25px; border-top: 1px solid #EDEFF2;',
 
     /* Type ------------------------------ */

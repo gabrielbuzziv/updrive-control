@@ -26,7 +26,7 @@ class InstallAccount
     /**
      * Handle the event.
      *
-     * @param  StorageInstalled  $event
+     * @param  StorageInstalled $event
      * @return void
      */
     public function handle(StorageInstalled $event)
@@ -109,9 +109,10 @@ class InstallAccount
     {
         $password = str_random(8);
         $userId = $this->connection->table('users')->insertGetId([
-            'name'     => $this->account->name,
-            'email'    => $this->account->email,
-            'password' => bcrypt($password),
+            'name'      => $this->account->name,
+            'email'     => $this->account->email,
+            'password'  => bcrypt($password),
+            'is_active' => false,
         ]);
 
         $permissions = $this->connection->table('permissions')->get()->toArray();

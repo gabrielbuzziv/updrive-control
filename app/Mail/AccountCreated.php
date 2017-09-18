@@ -23,7 +23,7 @@ class AccountCreated extends Mailable
     public function __construct(Account $account)
     {
         $this->account = $account;
-        $this->url = "http://{$this->account->slug}.updrive.app?email={$this->account->email}";
+        $this->url = "http://{$this->account->slug}.updrive.app/#/registrar?email={$this->account->email}";
     }
 
     /**
@@ -33,6 +33,6 @@ class AccountCreated extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.account_created');
+        return $this->subject('Seja bem vindo ao UP Drive')->view('emails.account_created');
     }
 }
