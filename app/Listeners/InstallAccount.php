@@ -4,6 +4,7 @@ namespace App\Listeners;
 
 use App\Events\StorageInstalled;
 use App\Mail\AccountCreated;
+use Carbon\Carbon;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\DB;
@@ -112,7 +113,14 @@ class InstallAccount
             'name'      => $this->account->name,
             'email'     => $this->account->email,
             'password'  => bcrypt($password),
-            'is_active' => false,
+            'is_user'   => true,
+        ]);
+
+        $this->connection->table('users_registration')->insert([
+            'email' => $this->account->email,
+            'token' => md5($this->account->email),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
         ]);
 
         $permissions = $this->connection->table('permissions')->get()->toArray();

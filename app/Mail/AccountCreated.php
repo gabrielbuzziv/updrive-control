@@ -23,9 +23,10 @@ class AccountCreated extends Mailable
      */
     public function __construct(Account $account)
     {
-        $front_url = env('FRONTEND');
         $this->account = $account;
-        $this->url = "http://{$this->account->slug}.{$front_url}/#/registrar?email={$this->account->email}";
+        $front_url = env('FRONTEND');
+        $token = md5($this->account->email);
+        $this->url = "http://{$this->account->slug}.{$front_url}/#/registrar?email={$this->account->email}&token={$token}";
     }
 
     /**
