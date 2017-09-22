@@ -16,9 +16,7 @@ class TriggerWhenANewUserIsContactIsCreated extends Migration
         DB::unprepared("
             CREATE TRIGGER tr_Contact_Address AFTER INSERT ON users FOR EACH ROW
             BEGIN
-                IF (NEW.is_contact = 1) THEN
-                    INSERT INTO contacts_address(contact_id) VALUES(NEW.id);
-                END IF;
+                INSERT INTO contacts_address(contact_id) VALUES(NEW.id);
             END
         ");
     }

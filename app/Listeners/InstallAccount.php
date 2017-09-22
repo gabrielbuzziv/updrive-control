@@ -92,6 +92,7 @@ class InstallAccount
     private function installPermissions()
     {
         $permissions = [
+            ['name' => 'manage-account', 'display_name' => 'Gerenciar Conta'],
             ['name' => 'manage-users', 'display_name' => 'Gerenciar Usuários'],
             ['name' => 'manage-companies', 'display_name' => 'Gerenciar Empresas'],
             ['name' => 'manage-contacts', 'display_name' => 'Gerenciar Contatos'],
