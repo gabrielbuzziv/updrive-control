@@ -232,6 +232,8 @@ class AccountController extends Controller
         $accounts = Account::get();
 
         $accounts->each(function ($account) {
+            DB::disconnect('account');
+
             if ( ! DB::connection('account')->table("{$account->slug}.permissions")->where('name', 'manage-core')->first()) {
                 $permission = DB::connection('account')->table("{$account->slug}.permissions")->insert(['name' => 'manage-core', 'display_name' => 'Gerenciar Core']);
             } else {
