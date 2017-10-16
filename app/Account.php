@@ -14,6 +14,9 @@ class Account extends Model
      */
     protected $fillable = ['name', 'slug', 'email', 'logo', 'active'];
 
+    /**
+    * Get settings attribute.
+    */
     public function getSettingAttribute()
     {
         return (object) array_reduce($this->settings->toArray(), function ($result, $data) {

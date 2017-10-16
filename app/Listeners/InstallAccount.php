@@ -94,9 +94,7 @@ class InstallAccount
         $permissions = [
             ['name' => 'manage-account', 'display_name' => 'Gerenciar Conta'],
             ['name' => 'manage-users', 'display_name' => 'Gerenciar Usuários'],
-            ['name' => 'manage-companies', 'display_name' => 'Gerenciar Empresas'],
-            ['name' => 'manage-contacts', 'display_name' => 'Gerenciar Contatos'],
-            ['name' => 'manage-updrive', 'display_name' => 'Gerenciar Documentos'],
+            ['name' => 'manage-ccore', 'display_name' => 'Gerenciar Core'],
         ];
 
         array_walk($permissions, function ($permission) {

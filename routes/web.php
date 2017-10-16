@@ -15,6 +15,7 @@ Route::get('/', function () {
     return redirect('accounts');
 });
 
+Route::get('accounts/update-permissions', 'AccountController@updatePermissions');
 Route::get('accounts/{account}/details', 'AccountController@details');
 Route::get('accounts/{account}/backup', 'AccountController@backup');
 Route::get('accounts/{account}/settings', 'AccountController@settings');

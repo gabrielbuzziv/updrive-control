@@ -225,4 +225,40 @@ class AccountController extends Controller
 
         return redirect("/accounts/{$account->id}/modules");
     }
+
+
+    public function updatePermissions()
+    {
+        $accounts = Account::get();
+
+        $accounts->each(function ($account) {
+            if ( ! DB::connection('account')->table("{$account->slug}.permissions")->where('name', 'manage-core')->first()) {
+                $permission = DB::connection('account')->table("{$account->slug}.permissions")->insert(['name' => 'manage-core', 'display_name' => 'Gerenciar Core']);
+            } else {
+                $permission = DB::connection('account')->table("{$account->slug}.permissions")->where('name', 'manage-core')->first();
+            }
+
+            $users = DB::connection('account')->table("{$account->slug}.users")
+                ->where("{$account->slug}.users.is_user", 1)
+                ->get();
+
+            DB::connection('account')->table("{$account->slug}.permissions")
+                ->whereIn("{$account->slug}.permissions.name", ['manage-contacts', 'manage-companies', 'manage-updrive'])
+                ->delete();
+
+            foreach ($users as $user) {
+                $has = DB::connection('account')->table("{$account->slug}.permission_user")
+                    ->where('permission_id', $permission->id)
+                    ->where('user_id', $user->id)
+                    ->first();
+
+                if ( ! $has) {
+                    DB::connection('account')->table("{$account->slug}.permission_user")->insert([
+                        'permission_id' => $permission->id,
+                        'user_id'       => $user->id
+                    ]);
+                }
+            }
+        });
+    }
 }
