@@ -17,7 +17,7 @@ class CreateReportsTable extends Migration
             $table->increments('id');
             $table->integer('report_id'); // Static
             $table->integer('user_id')->unsigned();
-            $table->string('filters');
+            $table->longText('filters');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
