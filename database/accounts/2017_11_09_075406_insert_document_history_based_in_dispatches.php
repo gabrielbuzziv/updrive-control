@@ -15,7 +15,7 @@ class InsertDocumentHistoryBasedInDispatches extends Migration
      */
     public function up()
     {
-        $dispatches = DB::table('dispatches')->get();
+        $dispatches = DB::table('dispatches')->take(1)->get();
         $dispatches->each(function ($dispatch) {
             $trackings = DB::table('dispatches_tracking')->where('dispatch_id', $dispatch->id)->get();
             $documents = DB::table('dispatch_document')->where('dispatch_id', $dispatch->id)->get();
@@ -24,6 +24,7 @@ class InsertDocumentHistoryBasedInDispatches extends Migration
                 $doc = DB::table('documents')->where('id', $document->document_id)->first();
                 DB::table('documents_history')
                     ->where('user_id', $doc->user_id)
+                    ->where('document_id', $doc->id)
                     ->where('action', 2)
                     ->delete();
 
