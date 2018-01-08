@@ -13,10 +13,12 @@
     <input type="email" name="email" class="form-control" value="{{ $account ? $account->email : '' }}">
 </div>
 
+@if ($account)
 <div class="form-group">
     <label>Periodo de testes até</label>
     <input type="text" name="trial_expire_at" class="form-control" value="{{ $account ? $account->trial_expire_at : '' }}">
 </div>
+@endif
 
 <button type="submit" class="btn btn-success margin-top-20">Save</button>
 
