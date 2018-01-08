@@ -12,7 +12,7 @@ class Account extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'slug', 'email', 'logo', 'active'];
+    protected $fillable = ['name', 'slug', 'email', 'logo', 'active', 'trial_expire_at'];
 
     /**
     * Get settings attribute.

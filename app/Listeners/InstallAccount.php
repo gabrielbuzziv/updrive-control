@@ -35,6 +35,9 @@ class InstallAccount
         $this->account = $event->account;
 
         try {
+            $this->account->trial_expire_at = Carbon::today()->addDays(30);
+            $this->account->save();
+
             $this->installSettings();
             $this->connect();
             $this->installPermissions();
